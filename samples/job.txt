@@ -1,0 +1,10 @@
+AI Engineer (Remote)
+
+We need someone who can ship production GenAI features.
+
+Requirements:
+- Python and FastAPI
+- RAG, LangChain or LangGraph
+- embeddings and a vector database (FAISS, Pinecone, or Chroma)
+- Docker and CI/CD (GitHub Actions)
+- Nice to have: Databricks, Snowflake, SQL, AWS or Azure

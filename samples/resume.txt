@@ -1,0 +1,5 @@
+Senior Data / AI Engineer with 10+ years building lakehouse pipelines and production LLM agents.
+
+Skills: Python, SQL, PySpark, Databricks, Delta Lake, Snowflake, dbt, Airflow, ADF, Azure, AWS, GCP.
+Built RAG systems with LangChain, LangGraph, embeddings, FAISS, and Hugging Face models.
+APIs with FastAPI and .NET / C#. CI/CD via Azure DevOps and GitHub Actions. Docker, Power BI, Pandas.
