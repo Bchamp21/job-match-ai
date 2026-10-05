@@ -1,5 +1,7 @@
 # Job-Match AI
 
+**Live demo:** [job-match-ai-rawb.onrender.com](https://job-match-ai-rawb.onrender.com) · [API docs](https://job-match-ai-rawb.onrender.com/docs) (free tier, so the first load after idle can take ~50s)
+
 Scores a resume against a job post by skill overlap. Returns match %, matched skills, missing skills, and a short explanation. Built for portfolio demos and interviews.
 
 ## How it works
@@ -35,6 +37,10 @@ curl -s http://localhost:8000/match \
   -H 'Content-Type: application/json' \
   -d "{\"resume\": \"$(cat samples/resume.txt)\", \"job\": \"$(cat samples/job.txt)\"}"
 ```
+
+## Deploy (Render free tier)
+
+Deployed as a Docker web service on Render's free instance. Secrets are never committed: set `OPENAI_API_KEY` (and optional `OPENAI_MODEL`) under the service's Environment settings. Locally, copy `.env.example` to `.env`; the app loads it with `python-dotenv`.
 
 ## Docker
 
