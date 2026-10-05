@@ -11,7 +11,10 @@ flowchart LR
   C --> D["match % + missing skills"]
 ```
 
-v1 is deterministic keyword matching (no LLM). LLM scoring and embeddings are next.
+v0.2 blends keyword matching with optional LLM judgment.
+
+Set `OPENAI_API_KEY` or `GEMINI_API_KEY` (or `GOOGLE_API_KEY`) in the environment.
+Without a key, `/match` still works with keywords only. Pass `"use_llm": false` to force keywords.
 
 ## Quick start
 
@@ -42,7 +45,7 @@ docker run -p 8000:8000 job-match-ai
 
 ## Roadmap
 
-1. LLM enrichment for soft skills and seniority
+1. ~~LLM enrichment~~ (done in v0.2)
 2. Embedding-based semantic match
 3. Streamlit UI
 4. Deploy to Hugging Face Spaces
