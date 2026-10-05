@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Job-Match AI</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:960px;margin:24px auto;padding:0 16px;background:#0f172a;color:#e2e8f0}
+h1{margin:0 0 4px}p.sub{color:#94a3b8;margin:0 0 16px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+textarea{width:100%;height:220px;border-radius:8px;border:1px solid #334155;background:#1e293b;color:#e2e8f0;padding:8px;box-sizing:border-box}
+button{margin-top:12px;padding:10px 18px;border:0;border-radius:8px;background:#6366f1;color:#fff;font-size:16px;cursor:pointer}
+#out{margin-top:16px;padding:16px;border-radius:8px;background:#1e293b;display:none}
+.pct{font-size:40px;font-weight:700}.chip{display:inline-block;margin:3px;padding:3px 10px;border-radius:12px;font-size:13px}
+.ok{background:#14532d}.miss{background:#7f1d1d}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+</style></head><body>
+<h1>Job-Match AI</h1>
+<p class="sub">Paste a resume and a job post to see the match score, matched skills, and missing skills. <a href="/docs" style="color:#a5b4fc">API docs</a></p>
+<div class="grid">
+<div><label>Resume</label><textarea id="resume"></textarea></div>
+<div><label>Job description</label><textarea id="job"></textarea></div>
+</div>
+<label><input type="checkbox" id="llm" checked> Use ChatGPT scoring (when available)</label><br>
+<button id="go">Score match</button> <button id="sample" style="background:#334155">Load sample</button>
+<div id="out"></div>
+<script>
+const $=id=>document.getElementById(id);
+$('sample').onclick=async()=>{const r=await fetch('/samples');const s=await r.json();$('resume').value=s.resume;$('job').value=s.job;};
+$('go').onclick=async()=>{
+ const out=$('out');out.style.display='block';out.textContent='Scoring...';
+ try{const r=await fetch('/match',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({resume:$('resume').value,job:$('job').value,use_llm:$('llm').checked})});
+ const d=await r.json();if(!r.ok)throw new Error(JSON.stringify(d));
+ const chips=(a,c)=>(a||[]).map(x=>`<span class="chip ${c}">${x}</span>`).join('');
+ out.innerHTML=`<div class="pct">${d.match_percent}%</div><div>Mode: ${d.scoring_mode||''}</div><p>${d.explanation||''}</p><h3>Matched</h3>${chips(d.matched_skills,'ok')}<h3>Missing</h3>${chips(d.missing_skills,'miss')}`;
+ }catch(e){out.textContent='Error: '+e.message;}
+};
+</script></body></html>

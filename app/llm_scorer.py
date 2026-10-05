@@ -84,6 +84,7 @@ def enrich_with_llm(resume: str, job: str, base: MatchResult) -> MatchResult:
         return base
 
     prompt = PROMPT.format(resume=resume[:8000], job=job[:8000])
+    raw = None
     try:
         if os.environ.get("OPENAI_API_KEY", "").strip():
             raw = _call_openai(prompt)
@@ -92,6 +93,7 @@ def enrich_with_llm(resume: str, job: str, base: MatchResult) -> MatchResult:
     except (urllib.error.URLError, TimeoutError, KeyError, RuntimeError, json.JSONDecodeError):
         return base
 
+    # Strip markdown fences if the model wraps JSON
     text = raw.strip()
     if text.startswith("```"):
         text = text.strip("`")
@@ -105,13 +107,18 @@ def enrich_with_llm(resume: str, job: str, base: MatchResult) -> MatchResult:
 
     llm_pct = float(parsed.get("match_percent", base.match_percent))
     llm_pct = max(0.0, min(100.0, llm_pct))
+    # Average keyword + LLM so neither dominates
     blended = round((base.match_percent + llm_pct) / 2.0, 1)
     strengths = [str(s) for s in parsed.get("strengths", [])][:8]
     gaps = [str(g) for g in parsed.get("gaps", [])][:8]
     explanation = str(parsed.get("explanation") or base.explanation)
     if strengths:
         explanation += " Strengths: " + "; ".join(strengths) + "."
-    missing = gaps if gaps else base.missing_skills
+    if gaps:
+        # Prefer LLM gaps for missing_skills display when present
+        missing = gaps
+    else:
+        missing = base.missing_skills
 
     return MatchResult(
         match_percent=blended,
