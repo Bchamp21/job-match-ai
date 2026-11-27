@@ -1,0 +1,296 @@
+[
+ {
+  "ats": "greenhouse",
+  "slug": "stripe",
+  "company": "Stripe",
+  "group": "Technology"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "databricks",
+  "company": "Databricks",
+  "group": "Technology"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "datadog",
+  "company": "Datadog",
+  "group": "Technology"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "mongodb",
+  "company": "MongoDB",
+  "group": "Technology"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "cloudflare",
+  "company": "Cloudflare",
+  "group": "Technology"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "elastic",
+  "company": "Elastic",
+  "group": "Technology"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "okta",
+  "company": "Okta",
+  "group": "Technology"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "gitlab",
+  "company": "GitLab",
+  "group": "Technology"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "fivetran",
+  "company": "Fivetran",
+  "group": "Technology"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "anthropic",
+  "company": "Anthropic",
+  "group": "Technology"
+ },
+ {
+  "ats": "ashby",
+  "slug": "openai",
+  "company": "OpenAI",
+  "group": "Technology"
+ },
+ {
+  "ats": "ashby",
+  "slug": "notion",
+  "company": "Notion",
+  "group": "Technology"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "affirm",
+  "company": "Affirm",
+  "group": "Finance"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "brex",
+  "company": "Brex",
+  "group": "Finance"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "robinhood",
+  "company": "Robinhood",
+  "group": "Finance"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "coinbase",
+  "company": "Coinbase",
+  "group": "Finance"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "sofi",
+  "company": "SoFi",
+  "group": "Finance"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "carta",
+  "company": "Carta",
+  "group": "Finance"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "betterment",
+  "company": "Betterment",
+  "group": "Finance"
+ },
+ {
+  "ats": "ashby",
+  "slug": "ramp",
+  "company": "Ramp",
+  "group": "Finance"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "oscar",
+  "company": "Oscar",
+  "group": "Health care"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "natera",
+  "company": "Natera",
+  "group": "Health care"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "zocdoc",
+  "company": "Zocdoc",
+  "group": "Health care"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "flatironhealth",
+  "company": "Flatiron Health",
+  "group": "Health care"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "omadahealth",
+  "company": "Omada Health",
+  "group": "Health care"
+ },
+ {
+  "ats": "lever",
+  "slug": "veeva",
+  "company": "Veeva Systems",
+  "group": "Health care"
+ },
+ {
+  "ats": "lever",
+  "slug": "includedhealth",
+  "company": "Included Health",
+  "group": "Health care"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "spacex",
+  "company": "SpaceX",
+  "group": "Manufacturing, aerospace, mobility"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "rocketlab",
+  "company": "Rocket Lab",
+  "group": "Manufacturing, aerospace, mobility"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "waymo",
+  "company": "Waymo",
+  "group": "Manufacturing, aerospace, mobility"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "nuro",
+  "company": "Nuro",
+  "group": "Manufacturing, aerospace, mobility"
+ },
+ {
+  "ats": "lever",
+  "slug": "zoox",
+  "company": "Zoox",
+  "group": "Manufacturing, aerospace, mobility"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "samsara",
+  "company": "Samsara",
+  "group": "Logistics, retail, hospitality"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "flexport",
+  "company": "Flexport",
+  "group": "Logistics, retail, hospitality"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "instacart",
+  "company": "Instacart",
+  "group": "Logistics, retail, hospitality"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "lyft",
+  "company": "Lyft",
+  "group": "Logistics, retail, hospitality"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "airbnb",
+  "company": "Airbnb",
+  "group": "Logistics, retail, hospitality"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "toast",
+  "company": "Toast",
+  "group": "Logistics, retail, hospitality"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "faire",
+  "company": "Faire",
+  "group": "Logistics, retail, hospitality"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "sweetgreen",
+  "company": "sweetgreen",
+  "group": "Logistics, retail, hospitality"
+ },
+ {
+  "ats": "lever",
+  "slug": "gopuff",
+  "company": "Gopuff",
+  "group": "Logistics, retail, hospitality"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "duolingo",
+  "company": "Duolingo",
+  "group": "Education, media, legal, security"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "coursera",
+  "company": "Coursera",
+  "group": "Education, media, legal, security"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "reddit",
+  "company": "Reddit",
+  "group": "Education, media, legal, security"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "voxmedia",
+  "company": "Vox Media",
+  "group": "Education, media, legal, security"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "relativity",
+  "company": "Relativity",
+  "group": "Education, media, legal, security"
+ },
+ {
+  "ats": "greenhouse",
+  "slug": "verkada",
+  "company": "Verkada",
+  "group": "Education, media, legal, security"
+ },
+ {
+  "ats": "lever",
+  "slug": "palantir",
+  "company": "Palantir Technologies",
+  "group": "Education, media, legal, security"
+ },
+ {
+  "ats": "lever",
+  "slug": "spotify",
+  "company": "Spotify",
+  "group": "Education, media, legal, security"
+ }
+]

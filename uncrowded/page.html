@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Uncrowded: demand-first job finder</title>
+<style>
+:root{--bg:#f6f5f1;--card:#fff;--ink:#17211d;--mute:#5b6a63;--line:#dcded6;--accent:#0b6b50;--warn:#9a4a00;--bar:#bfe0d3}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1513;--card:#171f1c;--ink:#e7eee9;--mute:#9bada4;--line:#2a3530;--accent:#5fd3ad;--warn:#f0a35e;--bar:#1f4a3c}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,sans-serif}
+main{max-width:1080px;margin:auto;padding:24px 16px 64px}
+h1{font-size:2rem;margin:.2em 0}h2{margin:2em 0 .4em;font-size:1.25rem}
+p.note{color:var(--mute);margin:.3em 0 1em}a{color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:20px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px}
+.stat b{display:block;font-size:1.5rem}
+.scroll{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:10px}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--mute)}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar{height:6px;background:var(--bar);border-radius:3px;margin-top:4px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+select,input{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit}
+.why{color:var(--mute);font-size:.82rem}.flag{color:var(--warn);font-weight:600;font-size:.82rem}
+</style>
+</head>
+<body><main>
+<h1>Uncrowded</h1>
+<p class="note">Find openings where demand is high and the competition signals are low. No public source counts applicants per job, so every competition measure here is a proxy, and each score shows its reasons.</p>
+<div class="stats" id="stats"></div>
+
+<h2>Where employers are short of hires, all industries</h2>
+<p class="note" id="joltsNote"></p>
+<div class="scroll"><table id="ind"></table></div>
+
+<h2>H-1B wage filings for five data and AI roles</h2>
+<p class="note" id="h1bNote"></p>
+<div class="scroll"><table id="roles"></table></div>
+
+<h2>H-1B change-of-employer filings by sector</h2>
+<div class="scroll"><table id="sectors"></table></div>
+
+<h2>Ranked openings</h2>
+<p class="note">Order: remote C2C, then remote contracts that don't state C2C, then other contracts, then remote non-contract roles. Company career boards mostly list direct full-time jobs; add agency C2C listings with the CSV import. Confirm every detail on the employer's page.</p>
+<div class="filters">
+<select id="role"></select><select id="tier"></select>
+<input id="q" type="search" placeholder="Search title or company" aria-label="Search title or company">
+<label><input type="checkbox" id="hide" checked> Hide blocked and W2-only</label>
+</div>
+<p class="note" id="count"></p>
+<div class="scroll"><table id="jobs"></table></div>
+</main>
+<script type="application/json" id="data">__DATA__</script>
+<script>
+const D=JSON.parse(document.getElementById('data').textContent);
+const $=id=>document.getElementById(id), fmt=n=>n==null?'n/a':n.toLocaleString('en-US');
+function el(tag,text,cls){const e=document.createElement(tag);if(text!=null)e.textContent=text;if(cls)e.className=cls;return e}
+function table(id,head,rows){const t=$(id);t.replaceChildren();const h=t.createTHead().insertRow();
+  head.forEach(([x,num])=>h.appendChild(el('th',x,num?'n':null)));
+  const b=t.createTBody();rows.forEach(cells=>{const r=b.insertRow();cells.forEach((c,i)=>{const d=r.insertCell();if(head[i][1])d.className='n';
+  if(c instanceof Node)d.appendChild(c);else d.textContent=c})})}
+[[fmt(D.scanned),'postings scanned'],[fmt(D.jobs.length),'in target roles'],[fmt(D.boards),'company boards'],[fmt(D.h1b.certified_h1b_lcas),'certified H-1B wage filings analyzed']]
+ .forEach(([v,l])=>{const s=el('div',null,'stat');s.append(el('b',v),el('span',l));$('stats').appendChild(s)});
+$('joltsNote').textContent='BLS JOLTS, September 2026 (preliminary, seasonally adjusted). Openings per hire is the openings rate divided by the hires rate (approximate). Higher suggests jobs stay hard to fill. It covers all occupations in an industry.';
+const max=Math.max(...D.industries.map(r=>r.openings_per_hire));
+table('ind',[['Industry'],['Openings per hire',1],['Openings rate %',1],['Hires rate %',1]],D.industries.map(r=>{
+  const c=el('div');c.appendChild(el('span',r.industry));const bar=el('div',null,'bar');bar.style.width=(100*r.openings_per_hire/max)+'%';c.appendChild(bar);
+  return [c,r.openings_per_hire.toFixed(2),r.openings_rate.toFixed(1),r.hires_rate.toFixed(1)]}));
+$('h1bNote').textContent=`DOL certified H-1B Labor Condition Applications decided ${D.h1b.decision_window[0]} to ${D.h1b.decision_window[1]}. A certified filing is not an approval, a hire or an open job. "Third-party site" means the filing names another company at the worksite. Wages are the median of the low end offered.`;
+table('roles',[['Role'],['Filings',1],['Change of employer',1],['Third-party site',1],['Median wage',1],['Most change-of-employer filings']],
+ Object.entries(D.h1b.roles).map(([k,v])=>[k,fmt(v.filings),fmt(v.transfer_filings),fmt(v.third_party_site),v.median_wage?'$'+fmt(v.median_wage):'n/a',v.top_transfer_employers.slice(0,4).map(x=>x[0]).join('; ')]));
+table('sectors',[['Sector'],['Change of employer',1],['All filings',1],['Employers',1],['Median wage',1]],
+ Object.entries(D.h1b.sectors).filter(([k])=>k!=='Unclassified').sort((a,b)=>b[1].transfer_filings-a[1].transfer_filings).map(([k,v])=>[k,fmt(v.transfer_filings),fmt(v.filings),fmt(v.employers),v.median_wage?'$'+fmt(v.median_wage):'n/a']));
+function options(id,list,all){const s=$(id);s.appendChild(new Option(all,''));list.forEach(([v,l])=>s.appendChild(new Option(l,v)))}
+options('role',Object.keys(D.h1b.roles).map(r=>[r,r]),'All roles');options('tier',Object.entries(D.tiers),'All work types');
+function draw(){const role=$('role').value,tier=$('tier').value,q=$('q').value.toLowerCase(),hide=$('hide').checked;
+ const rows=D.jobs.filter(j=>(!role||j.role===role)&&(!tier||String(j.tier)===tier)&&(!q||(j.title+' '+j.company).toLowerCase().includes(q))&&(!hide||(!j.blockers.length&&j.engagement!=='w2-only')));
+ $('count').textContent=`${rows.length} matching, showing ${Math.min(rows.length,200)}. Page built ${D.generated}.`;
+ table('jobs',[['Opening'],['Work type'],['Location'],['Posted'],['Score',1]],rows.slice(0,200).map(j=>{
+  const c=el('div'),a=el('a',j.title);a.href=/^https?:/.test(j.url)?j.url:'#';a.target='_blank';a.rel='noopener';c.append(a,el('div',j.company+' · '+j.role));
+  if(j.reasons.length)c.appendChild(el('div',j.reasons.join('; '),'why'));
+  const flags=[...j.blockers];if(j.engagement==='w2-only')flags.push('W2 only');if(flags.length)c.appendChild(el('div',flags.join(', '),'flag'));
+  return [c,D.tiers[j.tier],j.location||'not stated',j.posted||'not stated',String(j.score)]}))}
+['role','tier','q','hide'].forEach(i=>$(i).addEventListener('input',draw));draw();
+</script>
+</body></html>

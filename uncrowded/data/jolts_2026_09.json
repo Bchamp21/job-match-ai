@@ -1,0 +1,88 @@
+{
+ "month": "2026-09",
+ "status": "preliminary",
+ "adjustment": "seasonally adjusted",
+ "sources": [
+  "https://www.bls.gov/news.release/jolts.t01.htm",
+  "https://www.bls.gov/news.release/jolts.t02.htm"
+ ],
+ "how_captured": "Transcribed from the two BLS tables on 2026-11-27. Check against the source before relying on a value.",
+ "columns": [
+  "openings_rate",
+  "hires_rate"
+ ],
+ "industries": {
+  "Mining and logging": [
+   4.1,
+   3.4
+  ],
+  "Construction": [
+   3.4,
+   4.3
+  ],
+  "Durable goods manufacturing": [
+   4.9,
+   2.2
+  ],
+  "Nondurable goods manufacturing": [
+   3.7,
+   2.9
+  ],
+  "Wholesale trade": [
+   3.6,
+   2.8
+  ],
+  "Retail trade": [
+   4.3,
+   4.5
+  ],
+  "Transportation, warehousing, utilities": [
+   4.8,
+   4.0
+  ],
+  "Information": [
+   4.1,
+   3.4
+  ],
+  "Finance and insurance": [
+   4.2,
+   1.6
+  ],
+  "Real estate, rental, leasing": [
+   3.0,
+   2.1
+  ],
+  "Professional and business services": [
+   5.5,
+   4.1
+  ],
+  "Private educational services": [
+   3.2,
+   2.3
+  ],
+  "Health care and social assistance": [
+   5.8,
+   2.9
+  ],
+  "Arts, entertainment, recreation": [
+   4.3,
+   6.1
+  ],
+  "Accommodation and food services": [
+   4.4,
+   6.1
+  ],
+  "Other services": [
+   4.3,
+   3.5
+  ],
+  "Federal government": [
+   3.7,
+   1.0
+  ],
+  "State and local government": [
+   3.6,
+   1.4
+  ]
+ }
+}

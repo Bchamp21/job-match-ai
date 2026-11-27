@@ -1,5 +1,7 @@
 # Job-Match AI
 
+**New: [Uncrowded](uncrowded/README.md)**, a demand-first job finder with H-1B filing data, a from-scratch vector store, RAG, guardrails, a LangGraph agent and a [step-by-step course](uncrowded/LEARN.md).
+
 **Live demo:** [job-match-ai-rawb.onrender.com](https://job-match-ai-rawb.onrender.com) · [API docs](https://job-match-ai-rawb.onrender.com/docs) (free tier, so the first load after idle can take ~50s)
 
 Scores a resume against a job post by skill overlap. Returns match %, matched skills, missing skills, and a short explanation. Built for portfolio demos and interviews.
